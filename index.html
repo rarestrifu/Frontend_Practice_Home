@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="/style.css"></link>
+    <style>
+        
+    </style>
+</head>
+
+
+<body>
+    
+    
+    <h1 id = "todo-header">ToDoList</h1>
+    <div id = "app">
+        <div>
+            <input id = "todo-text-input" class="prompt" onkeyup=inputChange(event)>
+            <button id = "button-add" class = "type_2" onclick=createNewToDoItem(event)> Add </button>
+            <button id = "button-remove-all" class = "type_2" onclick=deleteAllItems(event)> Remove All </button>
+            <button id = "toggle-show" class = "type_2" onclick="toggleShow(event)">Hide </button>
+        </div>
+        <div id = "todo-list">
+
+        </div>
+    </div>
+    <script src = "main.js"></script>
+</body>
+
+</html>
