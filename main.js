@@ -2,11 +2,12 @@
 window.onload = function() {
     window.showCompleted = true;
     window.todos = _loadData();
-    _loadExternalData();
+    _renderToDoList();
 }
 
 //folosit pentru a genera list cu todo-uri
 function _renderToDoList() {
+    _renderPlaceholderText("No list");
     const todos = window.todos;
     for(let i = 0; i<todos.length; i++){
         const item = todos[i];
@@ -19,6 +20,7 @@ function _renderToDoList() {
 //placeholder-ul este folosit pentru a pune toate todo-urile inauntru, adica div-urile
 function _renderPlaceholderText(text){
     const placeholder = document.createElement('span');
+    placeholder.innerText = text;
     placeholder.id = 'placeholder';
     placeholder.style.display = 'none';
     _getTodoList().appendChild(placeholder); //lista va deveni ultimu copil al placeholder-ului
@@ -61,8 +63,11 @@ function _shouldDisplayPlaceholder() {
     }
 }
 
-async function _updatePlaceholderText(){
+async function _updatePlaceholderText(placeholderText){
     const placeholder = document.getElementById("placeholder");
+    if(placeholderText){
+        placeholder.innerText = placeholderText;
+    }
     placeholder.style.display = _shouldDisplayPlaceholder() ? ' ' : 'none';
 }
 
@@ -101,7 +106,7 @@ function _renderToDoItem(itemModel) {
     deleteTask.onclick = () => {
         const todoList = _getTodoList();
         console.log(todoList);
-        todoList.removeChild(_findUiItem(item.id));
+        todoList.removeChild(_findUiItem(itemModel.id));
         _updateListUi();
     }
     
