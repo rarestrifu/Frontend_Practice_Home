@@ -2,8 +2,7 @@
 window.onload = function() {
     window.showCompleted = true;
     window.todos = _loadData();
-    window.defaultPlaceholderText = "No items in list. Start adding your first item";
-    _renderToDoList();
+    _loadExternalData();
 }
 
 //folosit pentru a genera list cu todo-uri
@@ -43,8 +42,7 @@ function _updateListUi() {
         } else if(todo.completed){
             uiItem.style.display = 'none';
         }
-    }
-    
+    }  
 }
 
 function _shouldDisplayPlaceholder() {
@@ -63,7 +61,7 @@ function _shouldDisplayPlaceholder() {
     }
 }
 
-function _updatePlaceholderText(){
+async function _updatePlaceholderText(){
     const placeholder = document.getElementById("placeholder");
     placeholder.style.display = _shouldDisplayPlaceholder() ? ' ' : 'none';
 }
@@ -96,17 +94,31 @@ function _renderToDoItem(itemModel) {
 
     const deleteTask = document.createElement('button');
     deleteTask.id = "delete-button";
+    deleteTask.innerText = "-";
     container.appendChild(deleteTask);
 
     //deletion of a single element in the list
     deleteTask.onclick = () => {
         const todoList = _getTodoList();
-        todoList.removeChild(_findUiItem(this.item.id));
+        console.log(todoList);
+        todoList.removeChild(_findUiItem(item.id));
         _updateListUi();
     }
     
     _getTodoList().appendChild(item);
     
+}
+
+async function _loadExternalData() {
+    deleteAllItems();
+    window.todos = await _fetchData();
+    _renderToDoList();
+}
+
+async function _fetchData() {
+    const response = await fetch('https://dummyjson.com/todos?limit=5&skip='+0);
+    const json = await response.json();
+    return json.todos;
 }
 
 function updateItemState(itemId) {

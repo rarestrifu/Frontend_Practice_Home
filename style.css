@@ -21,9 +21,8 @@
 #delete-button {
     height: 14px;
     background-color: red;
-    justify-content: flex-end;
-    align-self:center;
     margin-left: auto;
+    justify-items: auto;
 }
 
 button:not(:disabled) {

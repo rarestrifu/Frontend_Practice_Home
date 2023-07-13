@@ -33,7 +33,7 @@ async function loadResponse() {
     try{
     console.log("starting");
     const promise = await fetch('https://dummyjson.com/todos?limit=5&skip='+0)
-    let json = await promise.json();
+    const json = await promise.json();
     displayTodos(json.todos);
     } catch(err){
         console.log(err);
