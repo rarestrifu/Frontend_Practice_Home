@@ -99,9 +99,9 @@ function _renderToDoItem(itemModel) {
     container.appendChild(deleteTask);
 
     //deletion of a single element in the list
-    deleteTask.onclick = function(itemModel){
+    deleteTask.onclick = () => {
         const todoList = _getTodoList();
-        todoList.removeChild(_findUiItem(itemModel.id));
+        todoList.removeChild(_findUiItem(this.item.id));
         _updateListUi();
     }
     
